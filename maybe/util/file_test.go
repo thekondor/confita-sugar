@@ -18,7 +18,9 @@ func Test_FileBackend_OriginalDecoratesErrorIsPreserved(t *testing.T) {
 		NewFileBackend("testdata/unsupported.cfg"),
 	)
 
-	dummyTo := struct{}{}
+	dummyTo := struct {
+		Dummy string `config:"dummy"`
+	}{}
 	err := loader.Load(context.Background(), &dummyTo)
 	require.Error(t, err)
 	// NOTE: not a best idea ever to rely on an implementation detail; currently there is no better way
